@@ -12,6 +12,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+    // return 'ok';
 });
 
 Route::get('/dashboard', function () {

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      qs:
+        specifier: ^6.14.0
+        version: 6.14.0
     devDependencies:
       '@inertiajs/vue3':
         specifier: ^2.0.0

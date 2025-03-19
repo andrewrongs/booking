@@ -17,4 +17,14 @@ export default defineConfig({
             },
         }),
     ],
+    // server: {
+    //     host: 'localhost', // 明確指定主機
+    //     port: 5173,
+    //     strictPort: true,
+    //     https: false,
+    //     hmr: {
+    //         host: 'localhost',
+    //         port: 5173
+    //     }
+    // }
 });
