@@ -4,9 +4,10 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <div>
+        <Head title="Dashboard" />
 
-    <AuthenticatedLayout>
+        <AuthenticatedLayout>
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
@@ -26,5 +27,6 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+        </AuthenticatedLayout>
+    </div>
 </template>
