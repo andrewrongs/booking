@@ -4,7 +4,17 @@
         "paths": {
             "@/*": ["resources/ts/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
-        }
+        },
+        "esModuleInterop": true,
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": ["esnext", "dom"],
+        "jsx": "preserve",
+        "strict": true,
+        "types": ["vite/client", "@types/node"],
+        "allowJs": true,
+        "skipLibCheck": true,
     },
     "exclude": ["node_modules", "public"]
 }

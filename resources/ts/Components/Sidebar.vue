@@ -1,86 +1,304 @@
 <template>
-  <aside
-    :class="`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
-      sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-    }`"
-  >
-    <!-- SIDEBAR HEADER -->
-    <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-      <router-link to="/">
-        <img src="/img/logo.svg" alt="Logo" />
-      </router-link>
-      <button
-        class="block lg:hidden"
-        @click="toggleSidebar"
-      >
-        <svg
-          class="fill-current"
-          width="20"
-          height="18"
-          viewBox="0 0 20 18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+    <aside
+        :class="[
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full',
+            isCollapsed ? 'w-[120px]' : 'w-[300px]',
+        ]"
+        class="absolute left-0 top-0 z-9999 flex h-screen flex-col overflow-y-hidden bg-gray-700 duration-300 ease-linear lg:static lg:translate-x-0"
+    >
+        <!-- Logo 區域 -->
+        <div
+            class="flex items-center justify-between gap-2 px-4 py-4 lg:py-6.5"
         >
-          <path
-            d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.21248 17.625 9.36248 17.4375C9.69998 17.1 9.69998 16.575 9.36248 16.2375L2.98748 9.75H19C19.45 9.75 19.825 9.375 19.825 8.925C19.825 8.475 19.45 8.175 19 8.175Z"
-            fill=""
-          />
-        </svg>
-      </button>
-    </div>
-    <!-- SIDEBAR HEADER -->
+            <div class="flex items-center">
+                <img
+                    :class="{ 'w-10': isCollapsed, 'w-32': !isCollapsed }"
+                    src="/logo.svg"
+                    alt="Logo"
+                />
+            </div>
 
-    <div class="flex flex-col overflow-y-auto duration-300 ease-linear">
-      <!-- Sidebar Menu -->
-      <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
-        <!-- Menu Group -->
-        <div>
-          <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">MENU</h3>
-          <!-- Menu Items -->
-          <ul class="mb-6 flex flex-col gap-1.5">
-            <li>
-              <router-link
-                to="/"
-                class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark"
-              >
+            <button
+                class="text-white hover:text-gray-300 rounded-full p-1 hover:bg-gray-600"
+                @click="toggleCollapse"
+            >
                 <svg
-                  class="fill-current"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
                 >
-                  <path
-                    d="M6.10322 0.956299H2.53135C1.5751 0.956299 0.787598 1.7438 0.787598 2.70005V6.27192C0.787598 7.22817 1.5751 8.01567 2.53135 8.01567H6.10322C7.05947 8.01567 7.84697 7.22817 7.84697 6.27192V2.70005C7.84697 1.7438 7.05947 0.956299 6.10322 0.956299ZM6.60947 6.27192C6.60947 6.54817 6.37947 6.77817 6.10322 6.77817H2.53135C2.2551 6.77817 2.0251 6.54817 2.0251 6.27192V2.70005C2.0251 2.4238 2.2551 2.1938 2.53135 2.1938H6.10322C6.37947 2.1938 6.60947 2.4238 6.60947 2.70005V6.27192Z"
-                    fill=""
-                  />
-                  <path
-                    d="M15.4689 0.956299H11.8971C10.9408 0.956299 10.1533 1.7438 10.1533 2.70005V6.27192C10.1533 7.22817 10.9408 8.01567 11.8971 8.01567H15.4689C16.4252 8.01567 17.2127 7.22817 17.2127 6.27192V2.70005C17.2127 1.7438 16.4252 0.956299 15.4689 0.956299ZM15.9752 6.27192C15.9752 6.54817 15.7452 6.77817 15.4689 6.77817H11.8971C11.6208 6.77817 11.3908 6.54817 11.3908 6.27192V2.70005C11.3908 2.4238 11.6208 2.1938 11.8971 2.1938H15.4689C15.7452 2.1938 15.9752 2.4238 15.9752 2.70005V6.27192Z"
-                    fill=""
-                  />
-                  <path
-                    d="M6.10322 10.3223H2.53135C1.5751 10.3223 0.787598 11.1098 0.787598 12.066V15.6379C0.787598 16.5941 1.5751 17.3816 2.53135 17.3816H6.10322C7.05947 17.3816 7.84697 16.5941 7.84697 15.6379V12.066C7.84697 11.1098 7.05947 10.3223 6.10322 10.3223ZM6.60947 15.6379C6.60947 15.9141 6.37947 16.1441 6.10322 16.1441H2.53135C2.2551 16.1441 2.0251 15.9141 2.0251 15.6379V12.066C2.0251 11.7898 2.2551 11.5598 2.53135 11.5598H6.10322C6.37947 11.5598 6.60947 11.7898 6.60947 12.066V15.6379Z"
-                    fill=""
-                  />
-                  <path
-                    d="M15.4689 10.3223H11.8971C10.9408 10.3223 10.1533 11.1098 10.1533 12.066V15.6379C10.1533 16.5941 10.9408 17.3816 11.8971 17.3816H15.4689C16.4252 17.3816 17.2127 16.5941 17.2127 15.6379V12.066C17.2127 11.1098 16.4252 10.3223 15.4689 10.3223ZM15.9752 15.6379C15.9752 15.9141 15.7452 16.1441 15.4689 16.1441H11.8971C11.6208 16.1441 11.3908 15.9141 11.3908 15.6379V12.066C11.3908 11.7898 11.6208 11.5598 11.8971 11.5598H15.4689C15.7452 11.5598 15.9752 11.7898 15.9752 12.066V15.6379Z"
-                    fill=""
-                  />
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
                 </svg>
-                Dashboard
-              </router-link>
-            </li>
-            <!-- 可以在這裡添加更多選單項目 -->
-          </ul>
+            </button>
         </div>
-      </nav>
-    </div>
-  </aside>
+
+        <div class="flex flex-col overflow-y-auto duration-300 ease-linear">
+            <!-- 用戶資訊 -->
+            <div class="px-4 py-4 border-b border-gray-600" v-if="!isCollapsed">
+                <div class="text-white">
+                    <div class="font-medium">
+                        {{ page.props.auth.user.name }}
+                    </div>
+                    <div class="text-sm text-gray-400">
+                        {{ page.props.auth.user.email }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-5 py-4 px-4 lg:mt-1 lg:px-6">
+                <div>
+                    <h3
+                        class="mb-4 text-sm font-medium text-gray-400"
+                        :class="{ 'text-center': isCollapsed }"
+                    >
+                        MENU
+                    </h3>
+
+                    <ul class="mb-6 flex flex-col gap-1.5">
+                        <!-- 儀表板 -->
+                        <li>
+                            <router-link
+                                to="/dashboard"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{
+                                    'justify-center': isCollapsed,
+                                    'bg-gray-800': route().current('dashboard'),
+                                }"
+                            >
+                                <svg
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                    />
+                                </svg>
+                                <span :class="{ hidden: isCollapsed }"
+                                    >儀表板</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >儀表板</span
+                                >
+                            </router-link>
+                        </li>
+
+                        <!-- 訂單管理 -->
+                        <li>
+                            <router-link
+                                to="/orders"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{
+                                    'justify-center': isCollapsed,
+                                    'bg-gray-800': route().current('orders.*'),
+                                }"
+                            >
+                                <svg
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                    />
+                                </svg>
+                                <span :class="{ hidden: isCollapsed }"
+                                    >訂單管理</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >訂單管理</span
+                                >
+                            </router-link>
+                        </li>
+
+                        <!-- 客戶管理 -->
+                        <li>
+                            <router-link
+                                to="/customers"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{
+                                    'justify-center': isCollapsed,
+                                    'bg-gray-800':
+                                        route().current('customers.*'),
+                                }"
+                            >
+                                <svg
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                    />
+                                </svg>
+                                <span :class="{ hidden: isCollapsed }"
+                                    >客戶管理</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >客戶管理</span
+                                >
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link
+                                to="/customers"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{
+                                    'justify-center': isCollapsed,
+                                    'bg-gray-800':
+                                        route().current('customers.*'),
+                                }"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3"
+                                    />
+                                </svg>
+
+                                <span :class="{ hidden: isCollapsed }"
+                                    >商品上架</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >商品上架</span
+                                >
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link
+                                to="/customers"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{
+                                    'justify-center': isCollapsed,
+                                    'bg-gray-800':
+                                        route().current('customers.*'),
+                                }"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-6"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
+                                    />
+                                </svg>
+
+                                <span :class="{ hidden: isCollapsed }"
+                                    >報表</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >報表</span
+                                >
+                            </router-link>
+                        </li>
+
+                        <!-- 登出按鈕 -->
+                        <li class="mt-auto">
+                            <Link
+                                :href="route('logout')"
+                                method="post"
+                                as="button"
+                                class="w-full group relative flex items-center gap-2.5 rounded-lg py-2 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                                :class="{ 'justify-center': isCollapsed }"
+                            >
+                                <svg
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                    />
+                                </svg>
+                                <span :class="{ hidden: isCollapsed }"
+                                    >登出</span
+                                >
+                                <span
+                                    v-if="isCollapsed"
+                                    class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
+                                    >登出</span
+                                >
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </aside>
 </template>
 
 <script setup lang="ts">
-import { useSidebar } from '@/composables/useSidebar'
+import { ref } from "vue";
+import { useSidebar } from "../composables/useSidebar";
+import { Link, usePage } from "@inertiajs/vue3";
 
-const { sidebarOpen, toggleSidebar } = useSidebar()
+interface User {
+    name: string;
+    email: string;
+}
+
+interface PageProps {
+    [key: string]: any;
+    auth: {
+        user: User;
+    };
+}
+
+const { sidebarOpen, toggleSidebar } = useSidebar();
+const isCollapsed = ref(false);
+const page = usePage<PageProps>();
+
+const toggleCollapse = () => {
+    isCollapsed.value = !isCollapsed.value;
+};
 </script>
