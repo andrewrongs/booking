@@ -2,7 +2,7 @@
     <aside
         :class="[
             sidebarOpen ? 'translate-x-0' : '-translate-x-full',
-            _isCollapsed ? 'w-[100px]' : 'w-[260px]',
+            _isCollapsed ? 'w-[100px]' : 'w-[200px]',
         ]"
         class="absolute left-0 top-0 z-9999 flex h-screen flex-col overflow-y-hidden bg-gray-700 duration-300 ease-linear lg:static lg:translate-x-0"
     >
@@ -47,9 +47,9 @@
             >
                 <div class="text-white">
                     <div class="font-medium">
-                        {{ page.props.auth.user.name }}
+                        {{ page.props.auth.user.name }} - {{ page.props.auth.user.role }}
                     </div>
-                    <div class="text-sm text-gray-400">
+                    <div class="text-[12px] text-gray-400">
                         {{ page.props.auth.user.email }}
                     </div>
                 </div>
@@ -65,11 +65,10 @@
                         {{ menuTitle }}
                     </h3>
                     <ul class="mb-6 flex flex-col gap-3">
-                        <!-- 儀表板 -->
                         <li v-for="(item, index) in sidebarItems" :key="index" class="cursor-pointer hover:douration-100">
-                            <router-link
-                                :to="item.route"
-                                class="group relative flex items-center gap-2.5 rounded-lg py-3 px-4 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
+                            <Link
+                                :href="item.route"
+                                class="group relative flex items-center gap-2.5 rounded-lg py-3 px-2 font-medium text-white duration-300 ease-in-out hover:bg-gray-800"
                                 :class="{
                                     'justify-center': _isCollapsed,
                                     'bg-gray-800':
@@ -95,7 +94,7 @@
                                     class="absolute right-full ml-1 rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100"
                                     >{{  item.title }}</span
                                 >
-                            </router-link>
+                            </Link>
                         </li>                        
                     </ul>
                 </div>
@@ -113,6 +112,7 @@ import { sidebarItems  } from "../composables/sidebarItem";
 interface User {
     name: string;
     email: string;
+    role: string;
 }
 
 interface PageProps {

@@ -39,7 +39,7 @@ export const sidebarItems: SidebarItem[] = [
             />`,
     },
     {
-        title: "商品上架",
+        title: "商品管理",
         route: "/storeProduct",
         routePattern: "products.*",
         icon: `<path
@@ -47,6 +47,16 @@ export const sidebarItems: SidebarItem[] = [
                 stroke-linejoin="round"
                 d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3"
             />`,
+    },
+    {
+        title: "圖片管理",
+        route: "/managerImage",
+        routePattern: "products.*",
+        icon: `<path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" 
+            >`,
     },
     {
         title: "報表",
@@ -59,3 +69,4 @@ export const sidebarItems: SidebarItem[] = [
             />`,
     },
 ];
+

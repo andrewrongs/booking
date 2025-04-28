@@ -20,16 +20,16 @@ const toggleSidebar = () => {
     <div class="flex min-h-screen bg-gray-100">
         <!-- 左側邊欄 -->
         <div class="bg-gray-800 text-white fixed h-full transition-all duration-300 ease-in-out"
-            :class="[isCollapsed ? 'w-20' : 'w-60']">
+            :class="[isCollapsed ? 'w-10' : 'w-100']">
             <Sidebar :isCollapsed="isCollapsed" @toggle-collapse="toggleSidebar" />
         </div>
 
-        <!-- 主要內容區域 -->
+        <!-- 主內容區域 -->
         <div class="flex-1 flex flex-col transition-all duration-300 ease-in-out"
-            :class="[isCollapsed ? 'ml-20' : 'ml-64']">
+            :class="[isCollapsed ? 'ml-24' : 'ml-48']">
             <!-- 頂部導航欄 -->
-            <nav class="bg-white border-b border-gray-200">
-                <div class="px-4 sm:px-6 lg:px-8">
+            <nav class="bg-white border-b border-gray-300">
+                <div class="px-6 sm:px-4 lg:px-8">
                     <div class="flex justify-end h-20 items-center">
                         <!-- 用戶資料下拉選單 -->
                         <div class="relative">
@@ -76,7 +76,7 @@ const toggleSidebar = () => {
                         </div>
 
                         <!-- 移動裝置選單按鈕 -->
-                        <div class="-me-2 flex items-center ml-4 sm:hidden">
+                        <!-- <div class="-me-2 flex items-center ml-4 sm:hidden">
                             <button
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
                                 class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
@@ -109,7 +109,7 @@ const toggleSidebar = () => {
                                     />
                                 </svg>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -140,7 +140,7 @@ const toggleSidebar = () => {
                             </div>
                         </div>
 
-                        <div class="mt-3 space-y-1">
+                        <div class="mt-2 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
                                 Profile
                             </ResponsiveNavLink>
@@ -161,7 +161,7 @@ const toggleSidebar = () => {
                 class="bg-white shadow"
                 v-if="$slots.header"
             >
-                <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                <div class="max-w-6xl px-4 py-6 sm:px-6 lg:px-10">
                     <slot name="header" />
                 </div>
             </header>
