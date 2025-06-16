@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'client_secrets' => [
+        'web' => env('CLIENT_SECRET_WEB'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

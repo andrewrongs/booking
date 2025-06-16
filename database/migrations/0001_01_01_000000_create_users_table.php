@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->comment('admin', 'user');
-            $table->string('level')->default('0')->comment('0', '1', '2');
+            $table->integer('role')->comment('1. admin, 2. user');
+            $table->integer('level')->comment('0. 最低權限, 1. 一般會員, 2. 超級管理員');
+            $table->date('birthday')->nullable();
+            $table->string('phone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
